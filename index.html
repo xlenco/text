@@ -1,11 +1,45 @@
+<!DOCTYPE html>
 <html>
-<head>
-<title>转跳</title>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<meta http-equiv="refresh" content="0;URL=http://fun.xzwidea.cn/">
-</head>
-<style>body{font-size:9pt;line-height:15pt}</style>
-<body bgcolor="#FFFFFF" text="#000000" " leftmargin="0" topmargin="20" marginwidth="0" marginheight="0">
-<center>正在转入小轻网-http://fun.xzwidea.cn/，请稍候......</center>
-</body>
-</html>
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+  </head>
+  <style type="text/css">
+    img{
+    width: 400px;
+    height: 400px;
+    background-size: cover;
+    border-radius: 50%;
+    box-shadow: 10px 10px 10px rgba(0,0,0,.5);
+    cursor: pointer;
+    }
+  </style>
+  <body>
+    <img id="img"  src="https://xlenco.onmicrosoft.cn/img/head.webp"/ >
+  </body>
+  <script type="text/javascript">
+    var rotateval=0
+    var Interval 
+    window.onload=function(){
+    rotate()
+
+    document.getElementById('img').onmousemove=function(){
+    clearInterval(Interval)
+    }
+    document.getElementById('img').onmouseleave=function(){
+    rotate()
+    }
+
+
+    function rotate(){
+    Interval=setInterval(function(){
+    var img=document.getElementById('img');
+    rotateval+=1;
+    img.style.transform='rotate('+rotateval+'deg)'
+    img.style.transition = '0.1s linear'
+    },100)
+    }
+
+    }
+    </script>
+    </html>
