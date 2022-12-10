@@ -5,26 +5,38 @@
 </head>
 <body>
     <script>
-        //获取必应每日壁纸
-        function getBingWallpaper(){
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', true);
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState == 4){
-                    if(xhr.status == 200){
-                        //获取到必应每日壁纸的相关信息
-                        var data = JSON.parse(xhr.responseText);
-                        //获取图片url
-                        var url = 'https://www.bing.com' + data.images[0].url;
-                        //设置壁纸
-                        document.body.style.backgroundImage = 'url(' + url + ')';
-                    }
-                }
-            };
-            xhr.send();
-        }
-        //调用函数
-        getBingWallpaper();
+// 实现一个随机获取必应壁纸的 API
+
+// 引入 cors 模块
+const cors = require('cors');
+
+// 设置跨域
+app.use(cors());
+
+// 设计 API
+app.get('/api/getBingWallpaper', (req, res) => {
+    // 请求必应接口，获取必应壁纸
+    // 这里使用 axios 库发起请求
+    axios.get('http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1')
+        .then(response => {
+            // 获取到壁纸的 URL
+            let wallpaperUrl = response.data.images[0].url;
+            // 拼接完整的 URL
+            wallpaperUrl = `https://www.bing.com${wallpaperUrl}`;
+            // 返回壁纸的 URL
+            res.send({
+                status: 200,
+                wallpaperUrl
+            });
+        })
+        .catch(err => {
+            // 如果请求发生错误，返回错误信息
+            res.send({
+                status: 500,
+                msg: '获取壁纸失败！'
+            });
+        });
+});
     </script>
 </body>
 </html>
