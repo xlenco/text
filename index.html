@@ -1,28 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-const getRandomBingWallpaper = () => {
-  const bingWallpaperUrl =
-    "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1";
-  return new Promise((resolve, reject) => {
-    fetch(bingWallpaperUrl)
-      .then((res) => res.json())
-      .then((data) => {
-        const { images } = data;
-        const { urlbase, copyright } = images[0];
-        const wallpaperUrl = `https://cn.bing.com${urlbase}_1920x1080.jpg`;
-        resolve({ wallpaperUrl, copyright });
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-};
+    <title>Random Bing Wallpaper API</title>
+    <script>
+        function getRandomWallpaper() {
+            const url = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US";
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const imageUrl = `https://www.bing.com${data.images[0].url}`;
+                document.body.style.backgroundImage = `url(${imageUrl})`;
+            });
+        }
+    </script>
 </head>
-</script>
-<body>
-
+<body onload="getRandomWallpaper()">
 
 </body>
 </html>
