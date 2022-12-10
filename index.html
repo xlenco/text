@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Random Bing Wallpaper API</title>
-    <script>
-        function getRandomWallpaper() {
-            const url = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US";
-            fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const imageUrl = `https://www.bing.com${data.images[0].url}`;
-                document.body.style.backgroundImage = `url(${imageUrl})`;
-            });
-        }
-    </script>
+    <title>必应壁纸API</title>
 </head>
-<body onload="getRandomWallpaper()">
-
+<body>
+    <script>
+        //获取必应每日壁纸
+        function getBingWallpaper(){
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', true);
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4){
+                    if(xhr.status == 200){
+                        //获取到必应每日壁纸的相关信息
+                        var data = JSON.parse(xhr.responseText);
+                        //获取图片url
+                        var url = 'https://www.bing.com' + data.images[0].url;
+                        //设置壁纸
+                        document.body.style.backgroundImage = 'url(' + url + ')';
+                    }
+                }
+            };
+            xhr.send();
+        }
+        //调用函数
+        getBingWallpaper();
+    </script>
 </body>
 </html>
