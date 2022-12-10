@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>必应壁纸API</title>
+    <title>Bing Wallpaper</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
+    <div>
+        <img id="bing-wallpaper" src="">
+    </div>
     <script>
-// 必应壁纸API
-const bingWallpaperApi = 'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1';
-
-// 跨域代理服务
-const corsProxy = 'https://cors-anywhere.herokuapp.com/';
-
-// 获取必应壁纸
-function fetchBingWallpaper() {
-  return new Promise((resolve, reject) => {
-    fetch(corsProxy + bingWallpaperApi)
-      .then(res => res.json())
-      .then(res => {
-        const imageUrl = `https://www.bing.com${res.images[0].url}`;
-        resolve(imageUrl);
-      })
-      .catch(err => reject(err));
-  });
-}
+        var url = 'http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1'
+        axios.get(url, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
+        .then(function (response) {
+            var imageUrl = 'http://www.bing.com' + response.data.images[0].url
+            document.getElementById('bing-wallpaper').src = imageUrl
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
     </script>
 </body>
 </html>
