@@ -1,27 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Bing Wallpaper</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-    <div>
-        <img id="bing-wallpaper" src="">
-    </div>
-    <script>
-        var url = 'http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1'
-        axios.get(url, {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-            }
-        })
-        .then(function (response) {
-            var imageUrl = 'http://www.bing.com' + response.data.images[0].url
-            document.getElementById('bing-wallpaper').src = imageUrl
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+  </head>
+  <style type="text/css">
+    img{
+    width: 400px;
+    height: 400px;
+    background-size: cover;
+    border-radius: 50%;
+    box-shadow: 10px 10px 10px rgba(0,0,0,.5);
+    cursor: pointer;
+    }
+  </style>
+  <body>
+    <img id="img"  src="https://xlenco.onmicrosoft.cn/img/head.webp"/ >
+  </body>
+  <script type="text/javascript">
+    var rotateval=0
+    var Interval 
+    window.onload=function(){
+    rotate()
+
+    document.getElementById('img').onmousemove=function(){
+    clearInterval(Interval)
+    }
+    document.getElementById('img').onmouseleave=function(){
+    rotate()
+    }
+
+
+    function rotate(){
+    Interval=setInterval(function(){
+    var img=document.getElementById('img');
+    rotateval+=1;
+    img.style.transform='rotate('+rotateval+'deg)'
+    img.style.transition = '0.1s linear'
+    },100)
+    }
+
+    }
     </script>
-</body>
-</html>
+    </html>
