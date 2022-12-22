@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新年倒计时</title>
+<style type="text/css">
+@charset "UTF-8";
+/* CSS Document */
+div{
+  margin:0;
+  padding:0;
+  border:0;
+}
+ 
+ 
+.time{
+  width:400px;
+  height:30px;
+  margin:30px auto;
+  font-size:14px;
+}
+#LeftTime
+{
+    color:red;
+}
+</style>
+</head>
+ 
+<body>
+<div class="time">距离新的一年还有 <span id="LeftTime"></span></div>
+<script>
+function FreshTime()
+{
+        var endtime=new Date("2017/1/28,00:00:00");//结束时间
+        var nowtime = new Date();//当前时间
+       var lefttime=  parseInt((endtime.getTime()-nowtime.getTime())/1000)  ; 
+        d=  parseInt(lefttime/(24*60*60))  ;
+        h=  parseInt(lefttime/(60*60)%24)  ;
+        m=  parseInt(lefttime/60%60)  ;
+        s=  parseInt(lefttime%60)  ;
+       
+        document.getElementById("LeftTime").innerHTML=d+"天"+h+"小时"+m+"分"+s+"秒";
+        if(lefttime<=0){
+        document.getElementById("LeftTime").innerHTML="新年快乐";
+        clearInterval(sh);
+        }
+}
+   FreshTime()
+   var sh;
+   sh= setInterval(FreshTime,1000)  ;
+</script>
+</body>
+</html>
